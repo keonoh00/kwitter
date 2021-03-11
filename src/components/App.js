@@ -14,6 +14,8 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
+      } else {
+        setUserObj(null);
       }
       setInit(true);
     })
@@ -30,7 +32,12 @@ function App() {
 
   return (
     <>
-      {init ? <AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Loading..."}
+      {init
+        ? (<AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} />)
+        : <div className="Loading">
+            <span>Loading...</span>
+          </div>
+      }
       <footer>&copy; {new Date().getFullYear()} Kwitter</footer>
     </>
   );

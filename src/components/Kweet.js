@@ -1,3 +1,5 @@
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService, storageService } from "fBase";
 import React, { useState } from "react";
 
@@ -37,16 +39,16 @@ const Kweet = ({ postObj, isOwner }) => {
   }
 
   return (
-    <div>
+    <div className="nweet">
       {editing ? (
         <>
           {isOwner &&
             <>
-              <form onSubmit={onSubmit}>
-                <input onChange={onChange} type="text" placeholder="Edit your Kweet" value={newKweet} required />
-                <input type="submit" value="Update Kweet" />
-                <button onClick={toggleEditing}>Cancel</button>
+              <form onSubmit={onSubmit} className="container nweetEdit">
+                <input onChange={onChange} type="text" placeholder="Edit your Kweet" value={newKweet} required autoFocus className="formInput" />
+                <input type="submit" value="Update Kweet" className="formBtn" />
               </form>
+              <span onClick={toggleEditing} className="formBtn cancelBtn">Cancel</span>
             </>
           }
         </>
@@ -54,12 +56,16 @@ const Kweet = ({ postObj, isOwner }) => {
         <>
         <div key={postObj.id}>
           <h4>{postObj.text}</h4>
-          {postObj.attachmentURL && <img src={postObj.attachmentURL} width="50px" height="50px" />}
+          {postObj.attachmentURL && <img src={postObj.attachmentURL} />}
           {isOwner && (
-            <>
-              <button onClick={deleteClick}>Delete Kweet</button>
-              <button onClick={toggleEditing}>Edit Kweet</button>
-            </>
+            <div className="nweet__actions">
+              <span onClick={deleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </span>
+          </div>
           )}
         </div>
         </>

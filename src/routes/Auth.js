@@ -1,41 +1,12 @@
+import { faGithub, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AuthForm from "components/AuthForm";
 import { authService, firebaseInstance } from "fBase";
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 
 const Auth = () => {
-  const history = useHistory()
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [newAccount, setNewAccont] = useState(true);
-
-  
-  const onChange = (event) => {
-    const {target: {name, value}} = event;
-    if (name === "email") {
-      setEmail(value);
-    } else if (name==="password") {
-      setPassword(value);
-    }
-  };
-
-
-  const onSubmit = async(event) => {
-    event.preventDefault();
-    try {
-      let user;
-      if (newAccount) {
-        user = await authService.createUserWithEmailAndPassword(email, password);
-      } else {
-        user = await authService.signInWithEmailAndPassword(email, password);
-      }
-      console.log(user);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  const toggleAcount = () => {setNewAccont(prev => !prev);}
-
+  const history = useHistory();
 
 
   // --------------------------- Social Login Below --------------------------- //
@@ -62,16 +33,16 @@ const Auth = () => {
     // await authService.signInWithPopup(provider);
   }
   return ( 
-    <div>
-      <form onSubmit={onSubmit}>
-        <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange} />
-        <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} />
-        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
-      </form>
-      <button onClick={toggleAcount}>{newAccount? "Log In" : "Create Account"}</button>
-      <div>
-        <button name="googleSignIn" onClick={onSocialClick}>Continue with Google</button>
-        <button name="githubSignIn" onClick={onSocialClick}>Continue with Github</button>
+    <div className="authContainer">
+      <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="3x" style={{ marginBottom: 30 }} />
+      <AuthForm />
+      <div className="authBtns">
+        <button name="googleSignIn" onClick={onSocialClick} className="authBtn">
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
+        </button>
+        <button name="githubSignIn" onClick={onSocialClick} className="authBtn">
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
+        </button>
       </div>
     </div>
   );

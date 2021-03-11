@@ -6,7 +6,6 @@ const Profile = ({ refreshUser, userObj }) => {
   const signOut = () => {
     authService.signOut();
     window.confirm("Successfully Signed Out");
-    window.location.replace("/");
   }
   
   const getMyKweets = async() => {
@@ -29,22 +28,37 @@ const Profile = ({ refreshUser, userObj }) => {
   
   const onSubmit = async(event) => {
     event.preventDefault()
-    if (userObj.displayName !== newDisplayName && newDisplayName != "") {
+    if (userObj.displayName !== newDisplayName && newDisplayName !== "") {
       await userObj.updateProfile({
         displayName: newDisplayName
       });
+      window.confirm("User Name has Changed");
       refreshUser();
     }
   }
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input onChange={onChange} type="text" placeholder="Username" value={newDisplayName} />
-        <input type="submit" value="Change Name" />
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="Type Name"
+          value={newDisplayName}
+          autoFocus
+          className="formInput"
+        />
+        <input
+          type="submit"
+          value="Update Profile"
+          className="formBtn"
+          style={{marginTop: 10}}
+        />
       </form>
-      <button onClick={signOut}>Sign Out</button>
-    </>
+      <span className="formBtn cancelBtn logOut" onClick={signOut}>
+        Sign Out
+      </span>
+    </div>
     )
   };
   
