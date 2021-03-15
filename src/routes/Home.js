@@ -8,6 +8,7 @@ const Home = ({ userObj }) => {
   
   const [posts, setPosts] = useState([]);
   
+  
   useEffect(() => {
     dbService.collection("kweets").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
       const dbPosts = snapshot.docs.map((doc) => ({
@@ -21,11 +22,12 @@ const Home = ({ userObj }) => {
   return (
     <div className="container">
       <KweetFactory userObj={userObj} />
-      <div style={{marginTop:30}}>
+      <div style={{marginTop:20}}>
         {posts.map((post) => (
           <Kweet
             key={post.id}
             postObj={post}
+            userObj={userObj}
             isOwner={post.creatorId === userObj.uid}
           />
         ))}

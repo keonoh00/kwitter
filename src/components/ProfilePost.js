@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService, storageService } from "fBase";
 import React, { useState } from "react";
 
-const Kweet = ({ postObj, isOwner, userObj }) => {
+const Kweet = ({ postObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newKweet, setNewKweet] = useState(postObj.text)
 
@@ -32,17 +32,14 @@ const Kweet = ({ postObj, isOwner, userObj }) => {
     }
   }
 
+
   const onChange = (event) => {
     const { target: { value } } = event;
     setNewKweet(value);
   }
 
-  const openImage = () => {
-    window.open(postObj.attachmentURL)
-  }
-
   return (
-    <div className="nweet">
+    <div className="profilePost">
       {editing ? (
         <>
           {isOwner &&
@@ -59,10 +56,7 @@ const Kweet = ({ postObj, isOwner, userObj }) => {
         <>
         <div key={postObj.id}>
           <h4>{postObj.text}</h4>
-          <div className="kweet__subinfo">
-            kweet from "{postObj.userName}" at {postObj.date}
-          </div>
-          {postObj.attachmentURL && <img onClick={openImage} src={postObj.attachmentURL} />}
+          {postObj.attachmentURL && <img src={postObj.attachmentURL} />}
           {isOwner && (
             <div className="nweet__actions">
               <span onClick={deleteClick}>

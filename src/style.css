@@ -32,6 +32,16 @@ form {
 	width: 100%;
 }
 
+.NavSignOut {
+	margin-left: 15px;
+	margin-top: 5px;
+	padding: 8px;
+	border-radius: 14px;
+	font-size: 12px;
+	text-align: center;
+	background-color: tomato;
+}
+
 .nweet-input::placeholder {
 	color: white;
 	opacity: 0.9;
@@ -80,6 +90,27 @@ form {
 	flex-direction: column;
 }
 
+.profilePostTitle {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+	padding: 20px 0 15px 20px;
+	font-weight: 1000;
+	font-size: 20px;
+}
+
+.profilePost {
+	margin: 20px 0 0 0;
+	background-color: white;
+	width: 100%;
+	max-width: 320px;
+	padding: 25px;
+	border-radius: 10px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	color: rgba(0, 0, 0, 0.8);
+	line-height: 1.4;
+}
+
 .logOut {
 	margin-top: 50px;
 }
@@ -105,7 +136,7 @@ form {
 
 .factoryInput__input {
 	flex-grow: 1;
-	height: 40px;
+	height: 50px;
 	padding: 0px 20px;
 	color: white;
 	border: 1px solid #04aaff;
@@ -117,13 +148,14 @@ form {
 .factoryInput__arrow {
 	position: absolute;
 	right: 0;
-	background-color: #04aaff;
+	background-color: transparent;
 	height: 40px;
 	width: 40px;
 	padding: 10px 0px;
 	text-align: center;
 	border-radius: 20px;
-	color: white;
+	color: #04aaff;
+	cursor: pointer;
 }
 
 .factoryInput__label {
@@ -172,12 +204,13 @@ form {
 	background-color: white;
 	width: 100%;
 	max-width: 320px;
-	padding: 20px;
+	padding: 25px;
 	border-radius: 10px;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	color: rgba(0, 0, 0, 0.8);
+	line-height: 1.4;
 }
 
 .nweet h4 {
@@ -185,12 +218,12 @@ form {
 }
 
 .nweet img {
-	right: -10px;
+	left: -55px;
 	top: 20px;
 	position: absolute;
 	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	margin-top: 10px;
 }
 
@@ -206,6 +239,14 @@ form {
 
 .nweet__actions span:first-child {
 	margin-right: 10px;
+}
+
+.kweet__subinfo {
+	position: absolute;
+	color: gray;
+	bottom: 8px;
+	right: 10px;
+	font-size: 10px;
 }
 
 /* Auth */
@@ -277,6 +318,7 @@ form {
 
 .Loading {
 	text-align: center;
+	padding-top: 30vh;
 	width: 100%;
 	height: 100%;
 	font-size: 32px;

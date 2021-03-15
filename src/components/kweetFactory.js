@@ -19,10 +19,19 @@ const KweetFactory = ({ userObj }) => {
       const response = await attachmentRef.putString(attachment, "data_url");
       attachmentURL = await response.ref.getDownloadURL();
     }
+    const nowTime = new Date(Date.now());
+    const year = nowTime.getFullYear();
+    const month = nowTime.getMonth() + 1;
+    const date = nowTime.getDate();
+    const hour = nowTime.getHours();
+    const minute = nowTime.getMinutes();
+    const time = `${year}/${month}/${date} ${hour}:${minute}`;
     const kweetObj = {
       text: kweet,
       createdAt: Date.now(),
+      date: time,
       creatorId: userObj.uid,
+      userName: userObj.displayName,
       attachmentURL,
     }
     await dbService.collection("kweets").add(kweetObj);
